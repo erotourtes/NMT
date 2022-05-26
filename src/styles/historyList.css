@@ -8,22 +8,18 @@
     max-height: 100%;
     overflow-Y: scroll;
     padding: 25px 15px;
+    text-align: center;
 }
 
 .history::-webkit-scrollbar {
     display: none;
 }
 
-.history span {
-    color: var(--main-color);
-}
-
 .history .word {
     position: relative;
-    border-bottom: 2px solid var(--sub-color);
+    border-bottom: 1px solid var(--sub-color);
     text-align: center;
     margin-top: 25px;
-    color: var(--text-color);
     animation: 0.3s cubic-bezier(.27,1.22,.34,1.24) reveal;
 }
 

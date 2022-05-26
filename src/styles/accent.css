@@ -3,7 +3,6 @@
 .container .accent {
     font-size: 75pt;
     letter-spacing: 5px;
-    color: var(--text-color);
     cursor: pointer;
 }
 
@@ -17,6 +16,7 @@
 }
 .container .accent span {
     position: relative;
+    color: var(--text-color);
 }
 .container .accent span:after {
   content: '';

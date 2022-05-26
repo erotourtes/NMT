@@ -1,9 +1,9 @@
 import { accent } from './data/data';
 import { ParseString } from './ParseString'
 import { WordsContainerI } from "./Interfaces/wordsContainerI"
-import $ = require('jquery');
 import { WordI } from './Interfaces/wordI';
 import Color from './colors';
+import $ = require('jquery');
 
 class Accent {
     private currentWord: WordI = { word: "", mistakes: 0, answerd: 0, correctIndexes: [], extraInformation: "" };
@@ -25,6 +25,7 @@ class Accent {
         this.currentWord = this.getWord();
         this.handleAddWord()
         this.handleSpanClick();
+        this.addStatistics();
     }
 
     private handleBtnClick() {
@@ -52,9 +53,22 @@ class Accent {
             }).promise().done(() => {
                 isHidden = !isHidden;
                 $(".history div").toggle();
-                $(".history button").text(isHidden ? "Fuck on" : "Fuck off");
+                $(".history button").text(isHidden ? "Dumb list" : "Fuck off");
             });
+        });
+    }
 
+    private addStatistics() {
+        this.keys.forEach((key) => {
+            this.words[key].forEach((word) => {
+                $(".statistics").append(`
+                <div class="word" data-atr=${word.word.toLowerCase()}>
+                    <h2>${this.formatWordWithSpan(word)}</h2>
+                    <div>
+                    <h2>${word.mistakes} ${word.answerd}</h2>
+                    </div>
+                </div>`);
+            });
         });
     }
 
@@ -142,4 +156,4 @@ class Accent {
     }
 }
 
-export { Accent }
+export default Accent; 

@@ -3,6 +3,8 @@
 @import url('./statistics.css');
 @import url('./header.css');
 @import url('./historyList.css');
+@import url('./input.css');
+@import url('./scrollTop.css');
 
 body {
     background-color: var(--bg-color);
@@ -13,6 +15,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     transition: all .1s ease-out;
+    color: var(--text-color);
 }
 
 .unselectable {
@@ -23,7 +26,6 @@ body {
 }
 
 button {
-    color: var(--text-color); 
     font-size: 15pt;
     background-color: var(--sub-alt-color);
     border: none;
@@ -32,6 +34,10 @@ button {
     width: 100%;
     border-radius: 5px;
     cursor: pointer;
+}
+
+span {
+  color: var(--main-color);
 }
 
 button:hover {
