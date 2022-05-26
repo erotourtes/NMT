@@ -1,0 +1,39 @@
+@import url('variables.css');
+
+.history {
+    position: fixed;
+    z-index: 100;
+    right: 0px;
+    width: 250px;
+    max-height: 100%;
+    overflow-Y: scroll;
+    padding: 25px 15px;
+}
+
+.history::-webkit-scrollbar {
+    display: none;
+}
+
+.history span {
+    color: var(--main-color);
+}
+
+.history .word {
+    position: relative;
+    border-bottom: 2px solid var(--sub-color);
+    text-align: center;
+    margin-top: 25px;
+    color: var(--text-color);
+    animation: 0.3s cubic-bezier(.27,1.22,.34,1.24) reveal;
+}
+
+@keyframes reveal {
+    from {
+        transform: translateY(100%);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}

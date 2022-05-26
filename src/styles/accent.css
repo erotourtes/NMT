@@ -1,10 +1,14 @@
 @import url('./variables.css');
 
 .container .accent {
-    font-size: 50pt;
+    font-size: 75pt;
     letter-spacing: 5px;
     color: var(--text-color);
     cursor: pointer;
+}
+
+.container .extraInfo {
+  color: var(--sub-color);
 }
 
 .container .accent span:hover {

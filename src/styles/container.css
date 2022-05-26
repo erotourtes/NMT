@@ -14,7 +14,8 @@
 }
 
 .menu {
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding: 50px 10%;
     width: 100%;
     display: grid;
     position: relative;
@@ -23,26 +24,10 @@
     place-items: center;
 }
 
-.menu .newBtn {
+ .newBtn {
     color: var(--main-color);
     grid-column: span 2;
 }
-.menu .correctBtn {
+/* .menu .correctBtn {
     color: var(--error-color);
-}
-
-.menu button {
-    color: var(--text-color); 
-    background-color: var(--sub-alt-color);
-    border: none;
-    min-width: 50px;
-    height: 30px;
-    width: 100%;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.menu button:hover {
-    background-color: var(--text-color);
-    color: var(--sub-alt-color);
-}
+} */

@@ -1,5 +1,8 @@
 @import url('./variables.css');
 @import url('./container.css');
+@import url('./statistics.css');
+@import url('./header.css');
+@import url('./historyList.css');
 
 body {
     background-color: var(--bg-color);
@@ -17,4 +20,51 @@ body {
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none; 
+}
+
+button {
+    color: var(--text-color); 
+    font-size: 15pt;
+    background-color: var(--sub-alt-color);
+    border: none;
+    padding: 15px;
+    min-width: 50px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--text-color);
+    color: var(--sub-alt-color);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--sub-color);
+  transition: 0.125s;
+  border-radius: 2px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--main-color);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--sub-color);
 }
