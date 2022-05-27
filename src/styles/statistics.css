@@ -1,0 +1,39 @@
+.statisticsWraper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--bg-color);
+    z-index: 999;
+    padding: 0 15vw;
+    overflow-Y: scroll;
+    overflow-x: hidden;
+}
+
+.statisticsWraper > h1 {
+    margin-top: 25px;
+    text-align: center;
+    color: var(--main-color);
+}
+
+.statisticsWraper .list {
+    border-bottom: 2px solid var(--sub-color);
+}
+
+.statisticsWraper .list .word {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list .letter h1, .letter{
+    color: var(--main-color);
+    margin: 25px 15px 0 0px;
+}
+
+.closeStatistics {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 25vw);
+}

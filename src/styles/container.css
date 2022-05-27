@@ -16,7 +16,8 @@
     width: 100%;
     display: grid;
     position: relative;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-columns: max-content;
     grid-gap: 10px;
     place-items: center;
 }
@@ -28,4 +29,14 @@
 
 .isUniqueBtn {
     grid-column: span 0;
+}
+
+@media (max-width: 991px) {
+	.menu {
+		grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+		grid-template-rows: minmax(auto, auto);
+	}
+    .newBtn {
+        grid-column: span 1;
+    }
 }

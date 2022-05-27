@@ -2,14 +2,13 @@
 	 background: var(--sub-alt-color);
 	 border-radius: .5em;
 	 overflow: hidden;
-	 width: 240px;
+	 /* width: 540px; */
 	 text-align: center;
 	 font-size: 18px;
 	 letter-spacing: 1px;
 	 color: var(--sub-alt-color);
 	 position: relative;
 	 padding-right: 120px;
-	 position: relative;
 }
 .switch-button span {
     color: var(--sub-alt-color);
@@ -21,7 +20,7 @@
 	 top: 0;
 	 bottom: 0;
 	 right: 0;
-	 width: 120px;
+	 width: 50%;
 	 display: flex;
 	 align-items: center;
 	 justify-content: center;
@@ -41,7 +40,7 @@
 }
  .switch-button-checkbox:checked + .switch-button-label:before {
 	 transform: translateX(120px);
-	 transition: transform 300ms linear;
+	 transition: transform 300ms ease-out;
 }
  .switch-button-checkbox + .switch-button-label {
 	 position: relative;
@@ -60,7 +59,7 @@
 	 top: 0;
 	 border-radius: 0.5em; 
 	 transform: translateX(0);
-	 transition: transform 300ms;
+	 transition: transform 300ms ease-out;
 }
  .switch-button-checkbox + .switch-button-label .switch-button-label-span {
 	 position: relative;

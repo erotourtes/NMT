@@ -4,23 +4,29 @@ import WordsContainerI from './Interfaces/wordsContainerI';
 import ParseString from './ParseString';
 import Color from './colors';
 import handleMovingSpan from './handleMovingSpan';
+import handleStatisticsRendering from './handleStatisticsRendering';
+import FormatWordWithSpan from './FormatWordWithSpan';
 import $ = require('jquery');
 
 class Accent {
     private currentWord: WordI = { word: "", mistakes: 0, answerd: 0, correctIndexes: [], extraInformation: "" };
+    private allWords: WordI[] = [];
 
     constructor(
-        readonly words = ParseString.parseAccent(accent),
-        readonly answered: WordsContainerI = {},
+        private words = ParseString.parseAccent(accent),
+        private answered: WordsContainerI = {},
         private keys = Object.keys(words),
-        readonly notAnswered: WordsContainerI = {},
+        private notAnswered: WordsContainerI = {},
         private isUnique = true,
     ) {
 
         this.handleBtnClick();
-        this.addStatistics();
+        this.addWordList();
         this.shuffleWords(words);
         keys.forEach(letter => notAnswered[letter] = [...words[letter]]);
+
+        this.allWords = Object.values(words).flatMap(words => words);
+
         this.start();
     }
 
@@ -47,7 +53,7 @@ class Accent {
         });
 
         $(".menu .statisticsBtn").click(() => {
-            alert("handle It")
+            handleStatisticsRendering(this.answered, this.notAnswered)
         });
 
         let isHidden = false;
@@ -69,12 +75,15 @@ class Accent {
         });
     }
 
-    private addStatistics() {
+    private addWordList() {
+        let wordList = $(".wordList");
         this.keys.forEach((key) => {
+            wordList.append(`<h1 class="letter">${key}</h1>`)
+
             this.words[key].forEach((word) => {
-                $(".statistics").append(`
+                wordList.append(`
                 <div class="word" data-atr=${word.word.toLowerCase()}>
-                    <h1>${this.formatWordWithSpan(word)}</h1>
+                    <h1>${FormatWordWithSpan.formatWordWithSpan(word)}</h1>
                 </div>`);
             });
         });
@@ -85,7 +94,7 @@ class Accent {
     }
 
     private handleAddWord() {
-        $(".accent").empty().append(this.wrapWordInSpan(this.currentWord.word.toLowerCase()));
+        $(".accent").empty().append(FormatWordWithSpan.wrapWordInSpan(this.currentWord.word.toLowerCase()));
         $(".extraInfo").empty().append(this.currentWord.extraInformation);
     }
 
@@ -98,8 +107,11 @@ class Accent {
                     this.colorSpan(Color.error, spanIndex);
                     setTimeout(() => { this.start() }, 2000);
                     this.addToHistoryList();
+                    word.mistakes++;
                 } else
                     setTimeout(() => { this.start() }, 500);
+
+                word.answerd++;
                 this.colorAllSpan(Color.main);
                 this.lockSpanClicking();
             });
@@ -107,19 +119,7 @@ class Accent {
     }
 
     private addToHistoryList() {
-        $(".history div").append(`<h2 class="word">${this.formatWordWithSpan(this.currentWord)}</h2>`)
-    }
-
-    private formatWordWithSpan(word: WordI) {
-        let formatedWord = word.word.split("")
-            .map(letter => {
-                return (letter.toLocaleUpperCase() === letter && letter !== "’") ?
-                    `${this.wrapWordInSpan(letter.toLowerCase())}` :
-                    letter;
-            }).join("");
-
-
-        return `${formatedWord}`
+        $(".history div").append(`<h2 class="word">${FormatWordWithSpan.formatWordWithSpan(this.currentWord)}</h2>`)
     }
 
     private colorAllSpan(color: string) {
@@ -154,13 +154,12 @@ class Accent {
     }
 
     private getWord(): WordI {
-        let keys = Object.keys(this.words);
-        let words = this.words;
+        const index = this.randomIndex(this.allWords.length);
+        const word = this.allWords[index]
 
-        let letter = keys[this.randomIndex(keys.length)];
-        let index = this.randomIndex(words[letter].length);
+        this.handleAnsweredWords("allWords", word);
 
-        return words[letter].at(index) ?? { word: "no words :C", mistakes: 0, answerd: 0, correctIndexes: [9], extraInformation: "press new word" };
+        return word;
     }
 
     private handleAnsweredWords(keyIndex: string, word: WordI) {
@@ -178,7 +177,8 @@ class Accent {
         });
 
     }
-    shuffleArray(array: WordI[]) {
+
+    private shuffleArray(array: WordI[]) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -186,13 +186,6 @@ class Accent {
     }
     private randomIndex(length: number) {
         return Math.floor(Math.random() * (length));
-    }
-
-    private wrapWordInSpan(word: string) {
-        return word
-            .split("")
-            .map(character => `<span>${character}</span>`)
-            .join("");
     }
 }
 

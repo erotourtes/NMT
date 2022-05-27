@@ -5,8 +5,9 @@
 @import url('input.css');
 @import url('scrollTop.css');
 @import url('accent.css');
-@import url('allWords.css');
+@import url('wordList.css');
 @import url('switch.css');
+@import url('statistics.css');
 
 body {
     background-color: var(--bg-color);
