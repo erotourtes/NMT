@@ -1,4 +1,4 @@
-import { WordsContainerI } from "./Interfaces/wordsContainerI"
+import WordsContainerI from "./Interfaces/wordsContainerI";
 
 class ParseString {
 
@@ -41,4 +41,4 @@ class ParseString {
     }
 }
 
-export { ParseString };
+export default ParseString;

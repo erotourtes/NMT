@@ -1,7 +1,7 @@
 import $ = require('jquery');
 
-export default function scrollTop() {
-    $("body").append(`
+export default async function scrollTop() {
+  $("body").append(`
     <div class="scrollToTop">
       <svg
         viewBox="0 0 100 100"
@@ -20,20 +20,20 @@ export default function scrollTop() {
     </div>
     `).promise().then(() => {
 
+    $(".scrollToTop").fadeOut();
+
+    $(document).scroll(function () {
+      if ($(this).scrollTop() ?? 0 > 100) {
+        $(".scrollToTop").fadeIn();
+      } else {
         $(".scrollToTop").fadeOut();
-
-        $(document).scroll(function () {
-            if ($(this).scrollTop() ?? 0 > 100) {
-                $(".scrollToTop").fadeIn();
-            } else {
-                $(".scrollToTop").fadeOut();
-            }
-        });
-
-        $(".scrollToTop").click(function () {
-            $("html, body").animate({ scrollTop: 0 }, 800);
-            return false;
-        });
+      }
     });
+
+    $(".scrollToTop").click(function () {
+      $("html, body").animate({ scrollTop: 0 }, 400);
+      return false;
+    });
+  });
 
 }

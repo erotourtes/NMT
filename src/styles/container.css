@@ -1,6 +1,3 @@
-@import url('./variables.css');
-@import url('accent.css');
-
 .container {
     width: 70vw;
     height: 100vh;
@@ -19,12 +16,16 @@
     width: 100%;
     display: grid;
     position: relative;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-gap: 10px;
     place-items: center;
 }
 
  .newBtn {
     color: var(--main-color);
-    grid-column: span 2;
+    grid-column: span 3;
+}
+
+.isUniqueBtn {
+    grid-column: span 0;
 }

@@ -1,5 +1,3 @@
-@import url('variables.css');
-
 .field__input{ 
   --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, var(--text-color));
   

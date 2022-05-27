@@ -1,5 +1,5 @@
-import { WordI } from "./wordI"
+import WordI from "./wordI"
 
-export interface WordsContainerI {
+export default interface WordsContainerI {
     [k: string]: WordI[]
 }

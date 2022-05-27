@@ -1,9 +1,9 @@
-@import url('./variables.css');
-
 .container .accent {
     font-size: 75pt;
     letter-spacing: 5px;
     cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .container .extraInfo {
@@ -27,11 +27,23 @@
   bottom: 0;
   left: 0;
   background-color: var(--primary-color);
-  transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
 
 .container .accent span:hover:after {
   transform: scaleX(1);
+}
+
+.container .accent .right:after {
+  transform-origin: bottom left;
+}
+.container .accent .right:hover:after {
+  transform-origin: bottom right;
+}
+
+.container .accent .left:after {
+  transform-origin: bottom right;
+}
+.container .accent .left:hover:after {
   transform-origin: bottom left;
 }

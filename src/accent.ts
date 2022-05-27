@@ -1,8 +1,9 @@
 import { accent } from './data/data';
-import { ParseString } from './ParseString'
-import { WordsContainerI } from "./Interfaces/wordsContainerI"
-import { WordI } from './Interfaces/wordI';
+import WordI from './Interfaces/wordI';
+import WordsContainerI from './Interfaces/wordsContainerI';
+import ParseString from './ParseString';
 import Color from './colors';
+import handleMovingSpan from './handleMovingSpan';
 import $ = require('jquery');
 
 class Accent {
@@ -12,20 +13,26 @@ class Accent {
         readonly words = ParseString.parseAccent(accent),
         readonly answered: WordsContainerI = {},
         private keys = Object.keys(words),
-        readonly notAnswered: WordsContainerI = {}
+        readonly notAnswered: WordsContainerI = {},
+        private isUnique = true,
     ) {
-        keys.forEach(letter => notAnswered[letter] = [...words[letter]]);
 
-        this.start();
         this.handleBtnClick();
+        this.addStatistics();
+        this.shuffleWords(words);
+        keys.forEach(letter => notAnswered[letter] = [...words[letter]]);
+        this.start();
     }
 
 
     private start() {
-        this.currentWord = this.getWord();
+        if (this.isUnique)
+            this.currentWord = this.getUniqueWord();
+        else
+            this.currentWord = this.getWord();
         this.handleAddWord()
         this.handleSpanClick();
-        this.addStatistics();
+        handleMovingSpan();
     }
 
     private handleBtnClick() {
@@ -40,7 +47,7 @@ class Accent {
         });
 
         $(".menu .statisticsBtn").click(() => {
-            alert("handleIT");
+            alert("handle It")
         });
 
         let isHidden = false;
@@ -56,6 +63,10 @@ class Accent {
                 $(".history button").text(isHidden ? "Dumb list" : "Fuck off");
             });
         });
+
+        $(".menu input").change(() => {
+            this.isUnique = !this.isUnique;
+        });
     }
 
     private addStatistics() {
@@ -63,17 +74,14 @@ class Accent {
             this.words[key].forEach((word) => {
                 $(".statistics").append(`
                 <div class="word" data-atr=${word.word.toLowerCase()}>
-                    <h2>${this.formatWordWithSpan(word)}</h2>
-                    <div>
-                    <h2>${word.mistakes} ${word.answerd}</h2>
-                    </div>
+                    <h1>${this.formatWordWithSpan(word)}</h1>
                 </div>`);
             });
         });
     }
 
     private lockSpanClicking() {
-        $(".accent span").unbind();
+        $(".accent span").off("click");
     }
 
     private handleAddWord() {
@@ -122,18 +130,37 @@ class Accent {
         $(`.accent span`).eq(index).css({ color: color });
     }
 
-    private getWord() {
+    private getUniqueWord() {
+        let words = this.notAnswered;
         let word;
+        let keys = Object.keys(words);
 
         while (true) {
-            let keyIndex = this.keys[this.randomIndex(this.keys.length)];
-            word = this.notAnswered[keyIndex].pop();
+            let keyIndex = keys[this.randomIndex(keys.length)];
+            word = words[keyIndex].pop();
+
+            if (words[keyIndex].length === 0) {
+                console.log(words)
+
+                delete words[keyIndex];
+            }
 
             if (word !== undefined) {
                 this.handleAnsweredWords(keyIndex, word);
                 return word;
             }
+
         }
+    }
+
+    private getWord(): WordI {
+        let keys = Object.keys(this.words);
+        let words = this.words;
+
+        let letter = keys[this.randomIndex(keys.length)];
+        let index = this.randomIndex(words[letter].length);
+
+        return words[letter].at(index) ?? { word: "no words :C", mistakes: 0, answerd: 0, correctIndexes: [9], extraInformation: "press new word" };
     }
 
     private handleAnsweredWords(keyIndex: string, word: WordI) {
@@ -144,6 +171,19 @@ class Accent {
         this.answered[keyIndex].push(word);
     }
 
+    private shuffleWords(words: WordsContainerI) {
+        Object.keys(words).forEach((letter) => {
+            for (let i = 0; i < 10; i++)
+                this.shuffleArray(words[letter]);
+        });
+
+    }
+    shuffleArray(array: WordI[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
     private randomIndex(length: number) {
         return Math.floor(Math.random() * (length));
     }

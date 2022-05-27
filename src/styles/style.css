@@ -1,10 +1,12 @@
-@import url('./variables.css');
-@import url('./container.css');
-@import url('./statistics.css');
-@import url('./header.css');
-@import url('./historyList.css');
-@import url('./input.css');
-@import url('./scrollTop.css');
+@import url('variables.css');
+@import url('container.css');
+@import url('header.css');
+@import url('historyList.css');
+@import url('input.css');
+@import url('scrollTop.css');
+@import url('accent.css');
+@import url('allWords.css');
+@import url('switch.css');
 
 body {
     background-color: var(--bg-color);
@@ -32,7 +34,7 @@ button {
     padding: 15px;
     min-width: 50px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 0.5em;
     cursor: pointer;
 }
 
