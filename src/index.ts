@@ -1,9 +1,3 @@
-import Accent from './accent';
-import handleInput from './handleInput';
-import scrollTop from './scrollTop';
-import handleBtnPress from './handleBtnPress';
+import init from './Init';
 
-const accent = new Accent();
-handleInput();
-scrollTop();
-handleBtnPress();
+init();
