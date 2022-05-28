@@ -10,7 +10,7 @@ const renderArray = (words: WordsContainerI) => {
             renderedArray += `
             <div class="word">
                 <h1>${FormatWordWithSpan.formatWordWithSpan(words)}</h1>
-                <h1>${words.answerd} ${words.mistakes}</h1>
+                <h1 class="answered_mistakes">${words.answerd} ${words.mistakes}</h1>
             </div>`
         })
     });

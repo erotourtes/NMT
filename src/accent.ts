@@ -1,4 +1,4 @@
-import { accent } from './data/data';
+import { accent, vowels } from './data/data';
 import WordI from './Interfaces/wordI';
 import WordsContainerI from './Interfaces/wordsContainerI';
 import ParseString from './ParseString';
@@ -102,6 +102,9 @@ class Accent {
         let word = this.currentWord;
         $(".accent span").each((spanIndex, span) => {
             $(span).click(() => {
+                if (!vowels.includes($(span).text()))
+                    return;
+
                 let isCorrect = word.correctIndexes.includes(spanIndex);
                 if (!isCorrect) {
                     this.colorSpan(Color.error, spanIndex);
@@ -135,15 +138,16 @@ class Accent {
         let word;
         let keys = Object.keys(words);
 
+        if (keys.length === 0)
+            return { word: "Well done", answerd: 0, mistakes: 0, correctIndexes: [4], extraInformation: "change mode to all words and hit the next button" };
+
         while (true) {
             let keyIndex = keys[this.randomIndex(keys.length)];
             word = words[keyIndex].pop();
 
-            if (words[keyIndex].length === 0) {
-                console.log(words)
-
+            if (words[keyIndex].length === 0)
                 delete words[keyIndex];
-            }
+
 
             if (word !== undefined) {
                 this.handleAnsweredWords(keyIndex, word);

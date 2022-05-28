@@ -47,9 +47,3 @@
 .container .accent .left:hover:after {
   transform-origin: bottom left;
 }
-
-@media (max-width: 991px) {
-  .accent span{
-    font-size: 75pt;
-  }
-}

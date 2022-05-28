@@ -286,4 +286,6 @@ A
 ярмаркОвий
 `;
 
-export { accent };
+const vowels = `а е и і о у я ю є ї`
+
+export { accent, vowels };
