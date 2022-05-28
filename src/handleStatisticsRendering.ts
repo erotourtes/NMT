@@ -6,11 +6,11 @@ const renderArray = (words: WordsContainerI) => {
     let renderedArray = ""
     Object.keys(words).forEach((letter) => {
         renderedArray += `<div class="letter"><h1>${letter}</h1></div>`;
-        words[letter].forEach(words => {
+        words[letter].forEach(word => {
             renderedArray += `
-            <div class="word">
-                <h1>${FormatWordWithSpan.formatWordWithSpan(words)}</h1>
-                <h1 class="answered_mistakes">${words.answerd} ${words.mistakes}</h1>
+            <div class="word ${word.mistakes > 0 ? "mistake" : ""}">
+                <h1>${FormatWordWithSpan.formatWordWithSpan(word)}</h1>
+                <h1 class="answered_mistakes">${word.answerd} ${word.mistakes}</h1>
             </div>`
         })
     });
@@ -25,7 +25,7 @@ const lockScrolling = () => {
 
 const unlockScrolling = () => {
     $('html, body').css({
-        overflow: 'scroll',
+        overflow: 'visible',
     });
 }
 

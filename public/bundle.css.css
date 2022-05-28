@@ -492,6 +492,10 @@ LEVEL 4. SETTINGS
     color: var(--main-color);
 }
 
+.statisticsWraper .mistake h1 {
+    color: var(--error-color);
+}
+
 .statisticsWraper .list {
     border-bottom: 2px solid var(--sub-color);
 }

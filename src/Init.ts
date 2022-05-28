@@ -2,7 +2,7 @@ import $ = require('jquery');
 import Accent from './accent';
 import handleInput from './handleInput';
 import scrollTop from './scrollTop';
-import handleBtnPress from './handleBtnPress';
+import handleKeyPress from './handleKeyPress';
 import handelMobile from './handleMobile';
 import changeThemeStyle from './changeThemeStyle';
 
@@ -49,7 +49,7 @@ export default function init() {
     const accent = new Accent();
     handleInput();
     scrollTop();
-    handleBtnPress();
+    handleKeyPress();
     handelMobile();
     // changeThemeStyle();
 }
