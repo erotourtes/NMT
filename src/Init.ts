@@ -3,7 +3,7 @@ import Accent from './accent';
 import handleInput from './handleInput';
 import scrollTop from './scrollTop';
 import handleBtnPress from './handleBtnPress';
-import handelMobile from './styles/handleMobile';
+import handelMobile from './handleMobile';
 import changeThemeStyle from './changeThemeStyle';
 
 

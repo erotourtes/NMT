@@ -32,8 +32,12 @@ const unlockScrolling = () => {
 export default function handleStatisticsRendering(answerd: WordsContainerI, notAnswered: WordsContainerI) {
     lockScrolling();
 
+    let answeredWords = 0;
+    Object.keys(answerd).forEach(letter => answeredWords += answerd[letter].length)
+
     $("body").prepend(`
     <div class="statisticsWraper">
+        <h1>${answeredWords} / 232 </h1>
         <button class="closeStatistics">close</button>
         <h1>History</h1>
         <div class="list">
